@@ -96,7 +96,12 @@ const Selection: React.FC<SelectionProps> = ({
       {items.length > 0 && (
         <StyledSelection>
           <Items items={items} handleSelectItem={handleSelectItem} />
-          <OrderSummary budget={budget} cart={cart} />
+          <OrderSummary
+            budget={budget}
+            cart={cart}
+            modalStage={modalStage}
+            setModalStage={setModalStage}
+          />
         </StyledSelection>
       )}
     </>

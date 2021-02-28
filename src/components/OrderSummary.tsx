@@ -90,8 +90,15 @@ interface Item {
 interface OrderSummaryProps {
   budget: string
   cart: Item[]
+  modalStage: number
+  setModalStage: (num: number) => void
 }
-const OrderSummary: React.FC<OrderSummaryProps> = ({ budget, cart }) => {
+const OrderSummary: React.FC<OrderSummaryProps> = ({
+  budget,
+  cart,
+  modalStage,
+  setModalStage,
+}) => {
   // calculate the upper price limit
   const upperPrice = cart.reduce((accum: number, current: Item) => {
     return accum + current.highPrice
@@ -109,7 +116,12 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ budget, cart }) => {
         <div className="summary-item">
           <div className="budget-line">
             <div>Budget</div>
-            <button className="change">Change</button>
+            <button
+              className="change"
+              onClick={() => setModalStage(modalStage - 1)}
+            >
+              Change
+            </button>
           </div>
           <div>${formatMoney(Number(budget))}</div>
         </div>
