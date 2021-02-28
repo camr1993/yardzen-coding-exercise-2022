@@ -49,7 +49,12 @@ const Selection: React.FC<SelectionProps> = ({
     })
     filtered.forEach((el) => {
       if (el === item) {
-        el.selected = true
+        // if already selected then unselect it
+        if (el.selected === true) {
+          el.selected = false
+        } else {
+          el.selected = true
+        }
       } else {
         el.selected = false
       }
