@@ -34,21 +34,49 @@ const Selection: React.FC<SelectionProps> = ({
   budget,
 }) => {
   const [items, setItems] = useState<Item[]>([])
+  const [cart, setCart] = useState<Item[]>([])
 
   useEffect(() => {
     loadItemsToState()
   }, [])
 
+  // When a user clicks on a item, this function will change the selected property on that item to true
+  // It will also change any previously selected item in that group to have a selected property of false
+  // Lastly, the cart is set to only include selected items
+  const handleSelectItem = (item: Item) => {
+    let filtered = items.filter((el) => {
+      return el.type === item.type
+    })
+    filtered.forEach((el) => {
+      if (el === item) {
+        el.selected = true
+      } else {
+        el.selected = false
+      }
+    })
+    // set the cart to only selected Items
+    setCart(
+      items.filter((item) => {
+        return item.selected === true
+      })
+    )
+  }
+
   // This function loads the 'items' collection from firestore and saves it on state
+  // It also removes duplicates from firestore
   const loadItemsToState = () => {
     const itemsRef = firebase.db.collection('items')
 
     itemsRef.get().then((querySnapshot) => {
       const itemArr = [] as Item[]
+      const seen: { [name: string]: boolean } = {}
       querySnapshot.forEach((doc) => {
         const item = doc.data() as Item
         item.selected = false
-        itemArr.push(item)
+        if (!(item.name in seen)) {
+          seen[item.name] = true
+          itemArr.push(item)
+        }
       })
       // sort item array by type property
       itemArr.sort((a, b) => {
@@ -62,7 +90,7 @@ const Selection: React.FC<SelectionProps> = ({
     <>
       {items.length > 0 && (
         <StyledSelection>
-          <Items items={items} />
+          <Items items={items} handleSelectItem={handleSelectItem} />
           <div>Cart</div>
         </StyledSelection>
       )}

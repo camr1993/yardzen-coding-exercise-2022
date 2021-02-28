@@ -1,29 +1,58 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
 
-const StyledItem = styled.div``
+const StyledItem = styled.div`
+  display: flex;
+  padding: 20px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid black;
+  transition: all 0.3s ease;
 
-// The Items component...
+  &:hover {
+    background-color: #3d7bee;
+    /* background-color: #327bff; */
+    color: #fff;
+  }
 
-interface ItemsProps {
+  .item-name {
+    font-weight: 600;
+    margin-right: 30px;
+  }
+
+  &.selected {
+    background-color: #3d7bee;
+    color: #fff;
+  }
+`
+
+// The Item component displays a singular item in the item list
+interface ItemProps {
   type: string
   name: string
   lowPrice: number
   highPrice: number
   selected?: boolean
 }
-const Item: React.FC<ItemsProps> = ({
+const Item: React.FC<ItemProps> = ({
   type,
   name,
   lowPrice,
   highPrice,
   selected,
 }) => {
+  const itemDiv = useRef<HTMLDivElement | null>(null)
+
+  // Take in a number and return it formatted as money
+  function formatMoney(number: number) {
+    return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
+  }
+
   return (
-    <StyledItem>
-      <div>{name}</div>
-      <div>{lowPrice}</div>
-      <div>{highPrice}</div>
+    <StyledItem className={`${selected ? 'selected' : ''}`}>
+      <div className="item-name">{name}</div>
+      <div>
+        Price Range: ${formatMoney(lowPrice)} - ${formatMoney(highPrice)}
+      </div>
     </StyledItem>
   )
 }

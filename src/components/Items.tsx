@@ -21,6 +21,10 @@ const StyledItems = styled.div`
   &::-webkit-scrollbar-track {
     margin-top: 2px;
   }
+
+  .item-group {
+    margin-bottom: 40px;
+  }
 `
 
 // The Items component shows a grouped list of the available items to purchase
@@ -35,8 +39,9 @@ interface Item {
 
 interface ItemsProps {
   items: Item[]
+  handleSelectItem: (item: Item) => void
 }
-const Items: React.FC<ItemsProps> = ({ items }) => {
+const Items: React.FC<ItemsProps> = ({ items, handleSelectItem }) => {
   // Find the different types of items (which will be used to group the item list shown)
   const uniqueTypes = items.reduce((accum: string[], current: Item) => {
     if (accum.indexOf(current.type) === -1) {
@@ -50,7 +55,7 @@ const Items: React.FC<ItemsProps> = ({ items }) => {
       {/* This section of code displays all the items grouped by type */}
       {uniqueTypes.map((type, i) => {
         return (
-          <div key={type + i}>
+          <div key={type + i} className="item-group">
             <h3>
               {type[0] + type.slice(1).replace(/[_]/g, ' ').toLowerCase()}
             </h3>
@@ -58,14 +63,15 @@ const Items: React.FC<ItemsProps> = ({ items }) => {
               .filter((el) => el.type === type)
               .map((el, i) => {
                 return (
-                  <Item
-                    key={el.name + i}
-                    type={el.type}
-                    name={el.name}
-                    lowPrice={el.lowPrice}
-                    highPrice={el.highPrice}
-                    selected={el.selected}
-                  />
+                  <div key={el.name + i} onClick={() => handleSelectItem(el)}>
+                    <Item
+                      type={el.type}
+                      name={el.name}
+                      lowPrice={el.lowPrice}
+                      highPrice={el.highPrice}
+                      selected={el.selected}
+                    />
+                  </div>
                 )
               })}
           </div>
