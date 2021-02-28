@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Items from './Items'
 import firebase from '../Firebase'
-import { isNotEmittedStatement } from 'typescript'
+import OrderSummary from './OrderSummary'
 
 const StyledSelection = styled.div`
   width: 80vw;
@@ -26,7 +26,7 @@ interface Item {
 interface SelectionProps {
   modalStage: number
   setModalStage: (num: number) => void
-  budget: number | string
+  budget: string
 }
 const Selection: React.FC<SelectionProps> = ({
   modalStage,
@@ -91,7 +91,7 @@ const Selection: React.FC<SelectionProps> = ({
       {items.length > 0 && (
         <StyledSelection>
           <Items items={items} handleSelectItem={handleSelectItem} />
-          <div>Cart</div>
+          <OrderSummary budget={budget} cart={cart} />
         </StyledSelection>
       )}
     </>

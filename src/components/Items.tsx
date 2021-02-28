@@ -22,6 +22,10 @@ const StyledItems = styled.div`
     margin-top: 2px;
   }
 
+  h2 {
+    margin-bottom: 35px;
+  }
+
   .item-group {
     margin-bottom: 40px;
   }
@@ -52,6 +56,7 @@ const Items: React.FC<ItemsProps> = ({ items, handleSelectItem }) => {
 
   return (
     <StyledItems>
+      <h2>Select Desired Elements</h2>
       {/* This section of code displays all the items grouped by type */}
       {uniqueTypes.map((type, i) => {
         return (

@@ -1,9 +1,11 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
+import formatMoney from './utils/formatMoney'
 
 const StyledItem = styled.div`
   display: flex;
   padding: 20px 10px;
+  margin-right: 20px;
   cursor: pointer;
   border-bottom: 1px solid black;
   transition: all 0.3s ease;
@@ -41,11 +43,6 @@ const Item: React.FC<ItemProps> = ({
   selected,
 }) => {
   const itemDiv = useRef<HTMLDivElement | null>(null)
-
-  // Take in a number and return it formatted as money
-  function formatMoney(number: number) {
-    return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
-  }
 
   return (
     <StyledItem className={`${selected ? 'selected' : ''}`}>
