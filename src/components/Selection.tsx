@@ -6,12 +6,21 @@ import OrderSummary from './OrderSummary'
 
 const StyledSelection = styled.div`
   width: 80vw;
-  max-height: 500px;
   background-color: #f5f4f4;
   border-radius: 5px;
   display: flex;
   padding: 30px;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+
+  @media screen and (max-width: 848px) {
+    flex-direction: column;
+    max-height: 90vh;
+    padding-left: 50px;
+  }
+  @media screen and (max-width: 456px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 `
 
 // The Selection component allows a user to see a list of items and add them to their cart

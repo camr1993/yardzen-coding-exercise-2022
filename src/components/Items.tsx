@@ -3,8 +3,14 @@ import styled from 'styled-components'
 import Item from './Item'
 
 const StyledItems = styled.div`
+  max-height: 500px;
   overflow-y: scroll;
   width: 60%;
+
+  @media screen and (max-width: 848px) {
+    width: 100%;
+    border-bottom: 3px solid black;
+  }
 
   &::-webkit-scrollbar {
     -webkit-appearance: none;

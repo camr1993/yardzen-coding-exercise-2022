@@ -6,6 +6,12 @@ const StyledOrderSummary = styled.div`
   padding-left: 50px;
   width: 40%;
 
+  @media screen and (max-width: 848px) {
+    width: 100%;
+    padding-left: 0;
+    margin-top: 30px;
+  }
+
   h2 {
     margin-bottom: 35px;
   }
@@ -126,12 +132,12 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
           <div>${formatMoney(Number(budget))}</div>
         </div>
         <div className="summary-item">
-          <div>Price (Upper Range)</div>
-          <div>${formatMoney(upperPrice)}</div>
-        </div>
-        <div className="summary-item">
           <div>Price (Lower Range)</div>
           <div>${formatMoney(lowerPrice)}</div>
+        </div>
+        <div className="summary-item">
+          <div>Price (Upper Range)</div>
+          <div>${formatMoney(upperPrice)}</div>
         </div>
         <hr />
         <div>Your Budget is...</div>
