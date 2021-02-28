@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import img from './images/bg.jpg'
 import Budget from './Budget'
+import Selection from './Selection'
 
 const StyledApp = styled.div`
   background-image: url(${img});
@@ -113,6 +114,19 @@ const StyledApp = styled.div`
         transform: translateY(0%);
       }
     }
+
+    .fade-in {
+      animation: fade-in-animation 0.8s ease;
+    }
+
+    @keyframes fade-in-animation {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
   }
 `
 
@@ -123,7 +137,7 @@ const StyledApp = styled.div`
 
 const App: React.FC = () => {
   const [modalStage, setModalStage] = useState<number>(0)
-  const [budget, setBudget] = useState<number | string>('')
+  const [budget, setBudget] = useState<string>('')
   const welcomeDiv = useRef<HTMLDivElement | null>(null)
 
   const handleGetStarted = () => {
@@ -159,6 +173,15 @@ const App: React.FC = () => {
               setModalStage={setModalStage}
               budget={budget}
               setBudget={setBudget}
+            />
+          </div>
+        )}
+        {modalStage === 2 && (
+          <div className="fade-in">
+            <Selection
+              modalStage={modalStage}
+              setModalStage={setModalStage}
+              budget={budget}
             />
           </div>
         )}

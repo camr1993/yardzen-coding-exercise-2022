@@ -62,8 +62,8 @@ const StyledBudget = styled.div`
 interface BudgetProps {
   modalStage: number
   setModalStage: (num: number) => void
-  budget: number | string
-  setBudget: (num: number) => void
+  budget: string
+  setBudget: (str: string) => void
 }
 const Budget: React.FC<BudgetProps> = ({
   modalStage,
@@ -88,7 +88,7 @@ const Budget: React.FC<BudgetProps> = ({
             type="number"
             name="budget"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setBudget(parseInt(e.target.value))
+              setBudget(e.target.value)
             }
             value={budget}
             required
