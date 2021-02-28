@@ -50,6 +50,10 @@ const Selection: React.FC<SelectionProps> = ({
         item.selected = false
         itemArr.push(item)
       })
+      // sort item array by type property
+      itemArr.sort((a, b) => {
+        return a.type > b.type ? 1 : -1
+      })
       setItems(itemArr)
     })
   }

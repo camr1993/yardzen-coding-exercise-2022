@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Item from './Item'
 
 const StyledItems = styled.div`
   overflow-y: scroll;
@@ -22,7 +23,7 @@ const StyledItems = styled.div`
   }
 `
 
-// The Items component...
+// The Items component shows a grouped list of the available items to purchase
 
 interface Item {
   type: string
@@ -36,16 +37,37 @@ interface ItemsProps {
   items: Item[]
 }
 const Items: React.FC<ItemsProps> = ({ items }) => {
-  console.log('items', items)
+  // Find the different types of items (which will be used to group the item list shown)
+  const uniqueTypes = items.reduce((accum: string[], current: Item) => {
+    if (accum.indexOf(current.type) === -1) {
+      accum.push(current.type)
+    }
+    return accum
+  }, [])
+
   return (
-    <StyledItems className="show-scroll">
-      {items.map((el, i) => {
+    <StyledItems>
+      {/* This section of code displays all the items grouped by type */}
+      {uniqueTypes.map((type, i) => {
         return (
-          <div key={el.name + i}>
-            <div>{el.name}</div>
-            <div>{el.type}</div>
-            <div>{el.lowPrice}</div>
-            <div>{el.highPrice}</div>
+          <div key={type + i}>
+            <h3>
+              {type[0] + type.slice(1).replace(/[_]/g, ' ').toLowerCase()}
+            </h3>
+            {items
+              .filter((el) => el.type === type)
+              .map((el, i) => {
+                return (
+                  <Item
+                    key={el.name + i}
+                    type={el.type}
+                    name={el.name}
+                    lowPrice={el.lowPrice}
+                    highPrice={el.highPrice}
+                    selected={el.selected}
+                  />
+                )
+              })}
           </div>
         )
       })}
