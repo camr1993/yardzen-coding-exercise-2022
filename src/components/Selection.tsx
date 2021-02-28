@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Items from './Items'
 import firebase from '../Firebase'
+import { isNotEmittedStatement } from 'typescript'
 
 const StyledSelection = styled.div`
   width: 80vw;
@@ -20,6 +21,7 @@ interface Item {
   name: string
   lowPrice: number
   highPrice: number
+  selected?: boolean
 }
 interface SelectionProps {
   modalStage: number
@@ -45,13 +47,13 @@ const Selection: React.FC<SelectionProps> = ({
       const itemArr = [] as Item[]
       querySnapshot.forEach((doc) => {
         const item = doc.data() as Item
+        item.selected = false
         itemArr.push(item)
       })
       setItems(itemArr)
     })
   }
 
-  console.log('ITEMSSS', items)
   return (
     <>
       {items.length > 0 && (

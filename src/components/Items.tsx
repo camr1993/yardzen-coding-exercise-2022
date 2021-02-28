@@ -29,12 +29,14 @@ interface Item {
   name: string
   lowPrice: number
   highPrice: number
+  selected?: boolean
 }
 
 interface ItemsProps {
   items: Item[]
 }
 const Items: React.FC<ItemsProps> = ({ items }) => {
+  console.log('items', items)
   return (
     <StyledItems className="show-scroll">
       {items.map((el, i) => {
