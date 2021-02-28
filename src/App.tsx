@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import img from './images/bg.jpg'
-import Welcome from './Welcome'
+import Budget from './Budget'
 
 const StyledApp = styled.div`
   background-image: url(${img});
@@ -116,9 +116,14 @@ const StyledApp = styled.div`
   }
 `
 
+// App contains a background picture and a container for components to be rendered in
+// Initially just shows a welcome component
+// Upon clicking 'Get Started', the the welcome component disappears and the user is prompted to enter in their budget
+// Components are conditionally rendered depending on what 'modalStage' they are in (saved in state)
+
 const App: React.FC = () => {
   const [modalStage, setModalStage] = useState<number>(0)
-  const [budget, setBudget] = useState<number>(0)
+  const [budget, setBudget] = useState<number | string>('')
   const welcomeDiv = useRef<HTMLDivElement | null>(null)
 
   const handleGetStarted = () => {
@@ -149,7 +154,7 @@ const App: React.FC = () => {
         </div>
         {modalStage === 1 && (
           <div className="modal fly-in">
-            <Welcome
+            <Budget
               modalStage={modalStage}
               setModalStage={setModalStage}
               budget={budget}

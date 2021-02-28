@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const StyledWelcome = styled.div`
+const StyledBudget = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -56,20 +56,23 @@ const StyledWelcome = styled.div`
   }
 `
 
-interface WelcomeProps {
+// The Budget component displays an input for the user to enter in their desired budget
+// Upon submitting their budget, the user is shown a page displaying Items and their Cart
+
+interface BudgetProps {
   modalStage: number
   setModalStage: (num: number) => void
-  budget: number
+  budget: number | string
   setBudget: (num: number) => void
 }
-const Welcome: React.FC<WelcomeProps> = ({
+const Budget: React.FC<BudgetProps> = ({
   modalStage,
   setModalStage,
   budget,
   setBudget,
 }) => {
   return (
-    <StyledWelcome>
+    <StyledBudget>
       <div className="modal-title">Enter Budget:</div>
       <hr />
       <form
@@ -96,8 +99,8 @@ const Welcome: React.FC<WelcomeProps> = ({
           <button type="submit">Continue</button>
         </div>
       </form>
-    </StyledWelcome>
+    </StyledBudget>
   )
 }
 
-export default Welcome
+export default Budget
