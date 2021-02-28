@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import img from './images/bg.jpg'
-import Budget from './Budget'
-import Selection from './Selection'
+import Budget from './components/Budget'
+import Selection from './components/Selection'
 
 const StyledApp = styled.div`
   background-image: url(${img});
