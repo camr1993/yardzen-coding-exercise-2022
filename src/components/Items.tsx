@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const StyledItems = styled.div`
   overflow-y: scroll;
+  width: 60%;
 
   &::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -35,7 +36,7 @@ interface ItemsProps {
 }
 const Items: React.FC<ItemsProps> = ({ items }) => {
   return (
-    <StyledItems className="modal show-scroll">
+    <StyledItems className="show-scroll">
       {items.map((el, i) => {
         return (
           <div key={el.name + i}>
