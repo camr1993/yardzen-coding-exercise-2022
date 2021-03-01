@@ -49,33 +49,6 @@ const Selection: React.FC<SelectionProps> = ({
     loadItemsToState()
   }, [])
 
-  // When a user clicks on a item, this function will change the selected property on that item to true
-  // It will also change any previously selected item in that group to have a selected property of false
-  // Lastly, the cart is set to only include selected items
-  const handleSelectItem = (item: Item) => {
-    let filtered = items.filter((el) => {
-      return el.type === item.type
-    })
-    filtered.forEach((el) => {
-      if (el === item) {
-        // if already selected then unselect it
-        if (el.selected === true) {
-          el.selected = false
-        } else {
-          el.selected = true
-        }
-      } else {
-        el.selected = false
-      }
-    })
-    // set the cart to only selected Items
-    setCart(
-      items.filter((item) => {
-        return item.selected === true
-      })
-    )
-  }
-
   // This function loads the 'items' collection from firestore and saves it on state
   // It also removes duplicates from firestore
   const loadItemsToState = () => {
@@ -100,6 +73,52 @@ const Selection: React.FC<SelectionProps> = ({
     })
   }
 
+  // When a user clicks on a item, this function will change the selected property on that item to true
+  // It will also change any previously selected item in that group to have a selected property of false
+  // Lastly, the cart is set to only include selected items
+  const handleSelectItem = (item: Item) => {
+    let filtered = items.filter((el) => {
+      return el.type === item.type
+    })
+    filtered.forEach((el) => {
+      if (el === item) {
+        // if already selected then unselect it
+        if (el.selected === true) {
+          el.selected = false
+          // else, select it
+        } else {
+          el.selected = true
+        }
+      } else {
+        el.selected = false
+      }
+    })
+    // set the cart to only selected Items
+    setCart(
+      items.filter((item) => {
+        return item.selected === true
+      })
+    )
+  }
+
+  const handleSubmit = () => {
+    // Add a new document in collection "cities"
+    firebase.db
+      .collection('cameronRatliffBudgetResponses')
+      .doc('budget')
+      .set({
+        budgetResponses: cart,
+      })
+      .then(() => {
+        console.log('Document successfully written!')
+      })
+      .catch((error) => {
+        console.error('Error writing document: ', error)
+      })
+    setCart([])
+    setModalStage(modalStage + 1)
+  }
+
   return (
     <>
       {items.length > 0 && (
@@ -110,6 +129,7 @@ const Selection: React.FC<SelectionProps> = ({
             cart={cart}
             modalStage={modalStage}
             setModalStage={setModalStage}
+            handleSubmit={handleSubmit}
           />
         </StyledSelection>
       )}

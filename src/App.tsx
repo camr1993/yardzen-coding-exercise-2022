@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import img from './images/bg.jpg'
 import Budget from './components/Budget'
 import Selection from './components/Selection'
+import Success from './components/Success'
 
 const StyledApp = styled.div`
   background-image: url(${img});
@@ -140,6 +141,7 @@ const App: React.FC = () => {
   const [budget, setBudget] = useState<string>('')
   const welcomeDiv = useRef<HTMLDivElement | null>(null)
 
+  // Fades out the welcome screen and sets modalStage to 1 (which causes the budget component to fly in)
   const handleGetStarted = () => {
     if (welcomeDiv.current) {
       welcomeDiv.current.style.opacity = '0'
@@ -183,6 +185,11 @@ const App: React.FC = () => {
               setModalStage={setModalStage}
               budget={budget}
             />
+          </div>
+        )}
+        {modalStage === 3 && (
+          <div className="modal fade-in">
+            <Success setModalStage={setModalStage} />
           </div>
         )}
       </div>

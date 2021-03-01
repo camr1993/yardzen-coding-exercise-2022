@@ -98,12 +98,14 @@ interface OrderSummaryProps {
   cart: Item[]
   modalStage: number
   setModalStage: (num: number) => void
+  handleSubmit: () => void
 }
 const OrderSummary: React.FC<OrderSummaryProps> = ({
   budget,
   cart,
   modalStage,
   setModalStage,
+  handleSubmit,
 }) => {
   // calculate the upper price limit
   const upperPrice = cart.reduce((accum: number, current: Item) => {
@@ -157,7 +159,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
             <div>Not Enough for the Selected Items</div>
           </div>
         )}
-        {Number(budget) > lowerPrice && Number(budget) < upperPrice && (
+        {Number(budget) >= lowerPrice && Number(budget) < upperPrice && (
           <div className="result">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +175,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
             <div>Within the Upper/Lower Price Ranges</div>
           </div>
         )}
-        {Number(budget) > upperPrice && (
+        {Number(budget) >= upperPrice && (
           <div className="result">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -193,6 +195,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
           className="submit"
           type="button"
           disabled={Number(budget) < lowerPrice || cart.length === 0}
+          onClick={() => handleSubmit()}
         >
           Submit
         </button>
