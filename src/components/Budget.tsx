@@ -85,11 +85,20 @@ const Budget: React.FC<BudgetProps> = ({
         <div>
           <span>$</span>
           <input
-            type="number"
+            type="string"
             name="budget"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setBudget(e.target.value)
-            }
+            // adding in commas to budget number
+            // also testing to make sure user input is only numbers
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              if (
+                /[^0-9]/.test(e.target.value[e.target.value.length - 1]) ===
+                false
+              ) {
+                setBudget(
+                  Number(e.target.value.replace(/[,]/g, '')).toLocaleString()
+                )
+              }
+            }}
             value={budget}
             required
             min="0"
