@@ -109,12 +109,12 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   handleSubmit,
 }) => {
   // calculate the upper price limit
-  const upperPrice = cart.reduce((accum: number, current: Item) => {
+  const upperPrice: number = cart.reduce((accum: number, current: Item) => {
     return accum + current.highPrice
   }, 0)
 
   // calculate the lower price limit
-  const lowerPrice = cart.reduce((accum: number, current: Item) => {
+  const lowerPrice: number = cart.reduce((accum: number, current: Item) => {
     return accum + current.lowPrice
   }, 0)
 
