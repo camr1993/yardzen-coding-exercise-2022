@@ -117,7 +117,7 @@ const StyledApp = styled.div`
     }
 
     .fade-in {
-      animation: fade-in-animation 1.0s ease;
+      animation: fade-in-animation .8s ease;
     }
 
     @keyframes fade-in-animation {
@@ -143,15 +143,11 @@ const App: React.FC = () => {
 
   // Fades out the welcome screen and sets modalStage to 1 (which causes the budget component to fly in)
   const handleGetStarted = () => {
-    if (welcomeDiv.current) {
-      welcomeDiv.current.style.opacity = '0'
-      setTimeout(function () {
-        if (welcomeDiv.current) {
-          welcomeDiv.current.style.display = 'none'
-        }
-        setModalStage(1)
-      }, 800)
-    }
+    welcomeDiv.current!.style.opacity = '0'
+    setTimeout(function () {
+      welcomeDiv.current!.style.display = 'none'
+      setModalStage(1)
+    }, 800)
   }
 
   return (
