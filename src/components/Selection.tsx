@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Items from './Items'
-import firebase from '../Firebase'
+import db from '../Firebase'
 import OrderSummary from './OrderSummary'
 
 const StyledSelection = styled.div`
@@ -52,7 +52,7 @@ const Selection: React.FC<SelectionProps> = ({
   // This function loads the 'items' collection from firestore and saves it on state
   // It also removes duplicates from firestore
   const loadItemsToState = () => {
-    const itemsRef = firebase.db.collection('items')
+    const itemsRef = db.collection('items')
 
     itemsRef.get().then((querySnapshot) => {
       const itemArr = [] as Item[]
@@ -105,7 +105,7 @@ const Selection: React.FC<SelectionProps> = ({
 
   const handleSubmit = () => {
     // Add a new document in collection "cities"
-    firebase.db
+    db
       .collection('cameronRatliffBudgetResponses')
       .doc('budget')
       .set({

@@ -14,4 +14,4 @@ let config = {
 firebase.initializeApp(config)
 let db = firebase.firestore()
 
-export default { firebase, db }
+export default db
