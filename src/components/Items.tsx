@@ -34,6 +34,10 @@ const StyledItems = styled.div`
 
   .item-group {
     margin-bottom: 40px;
+
+    .header {
+      color: grey;
+    }
   }
 `
 
@@ -67,8 +71,8 @@ const Items: React.FC<ItemsProps> = ({ items, handleSelectItem }) => {
       {uniqueTypes.map((type: string, i: number) => {
         return (
           <div key={type + i} className="item-group">
-            <h3>
-              {type[0] + type.slice(1).replace(/[_]/g, ' ').toLowerCase()}
+            <h3 className="header"><i>
+              {type[0] + type.slice(1).replace(/[_]/g, ' ').toLowerCase()}</i>
             </h3>
             {items
               .filter((el: Item) => el.type === type)
