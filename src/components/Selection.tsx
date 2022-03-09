@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Items from './Items'
-import db from '../Firebase'
+import { db, firebase } from '../Firebase'
 import OrderSummary from './OrderSummary'
 
 const StyledSelection = styled.div`
@@ -53,24 +53,44 @@ const Selection: React.FC<SelectionProps> = ({
   // It also removes duplicates from firestore
   const loadItemsToState = () => {
     db.collection('items').get().then((querySnapshot) => {
-      const itemArr = [] as Item[]
-      const seen: { [name: string]: boolean } = {}
-      querySnapshot.forEach((doc) => {
-        const item = doc.data() as Item
-        item.selected = false
-        item.lowPrice = item.lowPrice / 100
-        item.highPrice = item.highPrice / 100
-        if (!(item.name in seen)) {
-          seen[item.name] = true
-          itemArr.push(item)
-        }
-      })
-      // sort item array by type property
-      itemArr.sort((a, b) => {
+      const initialItemArr: Item[] = extractItemsFromSnapshot(querySnapshot)
+      const cleanedItemArr: Item[] = removeDuplicates(initialItemArr).sort((a, b) => {
         return a.type > b.type ? 1 : -1
       })
-      setItems(itemArr)
+
+      setItems(cleanedItemArr)
     })
+  }
+
+  const extractItemsFromSnapshot = (querySnapshot: firebase.firestore.DocumentData) => {
+    const itemArr = [] as Item[]
+
+    querySnapshot.forEach((doc: firebase.firestore.DocumentData) => {
+      const item = doc.data() as Item
+      item.selected = false
+      item.lowPrice = item.lowPrice / 100
+      item.highPrice = item.highPrice / 100
+      itemArr.push(item)
+    })
+
+    return itemArr
+  }
+
+  // Memoization chosen over ES6 methods (.filter & .findIndex or .reduce & .some) in favor of a better time complexity
+  // Memoization allows this to run in O(N) at the cost of O(N) space
+  // ES6 methods would all require nested looping leading to an O(N^2) runtime
+  const removeDuplicates = (itemArr: Item[]) => {
+    const seen: { [name: string]: boolean } = {}
+    const filteredItemArr = [] as Item[]
+
+    itemArr.forEach((item: Item) => {
+      if (!(item.name in seen)) {
+        seen[item.name] = true
+        filteredItemArr.push(item)
+      }
+    })
+
+    return filteredItemArr
   }
 
   // When a user clicks on a item, this function will change the selected property on that item to true
