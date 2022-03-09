@@ -197,7 +197,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
           className="submit"
           type="button"
           disabled={
-            convertBudgetToNum(budget) < lowerPrice || cart.length === 0
+            convertBudgetToNum(budget) < lowerPrice || !cart.length
           }
           onClick={() => handleSubmit()}
         >
