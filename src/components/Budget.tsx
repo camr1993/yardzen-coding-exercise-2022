@@ -76,7 +76,7 @@ const Budget: React.FC<BudgetProps> = ({
       <div className="modal-title">Enter Budget:</div>
       <hr />
       <form
-        onSubmit={(e) => {
+        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault()
           setModalStage(modalStage + 1)
         }}

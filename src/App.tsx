@@ -117,7 +117,7 @@ const StyledApp = styled.div`
     }
 
     .fade-in {
-      animation: fade-in-animation 0.8s ease;
+      animation: fade-in-animation 1.0s ease;
     }
 
     @keyframes fade-in-animation {
@@ -138,7 +138,7 @@ const StyledApp = styled.div`
 
 const App: React.FC = () => {
   const [modalStage, setModalStage] = useState<number>(0)
-  const [budget, setBudget] = useState<string>('')
+  const [budget, setBudget] = useState<string>('') // typed as a string to allow for automatic insertion of commas for larger numbers (ex. 10,000) in input field
   const welcomeDiv = useRef<HTMLDivElement | null>(null)
 
   // Fades out the welcome screen and sets modalStage to 1 (which causes the budget component to fly in)
