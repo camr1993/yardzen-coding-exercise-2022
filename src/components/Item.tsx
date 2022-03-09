@@ -11,7 +11,6 @@ const StyledItem = styled.div`
 
   &:hover {
     background-color: #3d7bee;
-    /* background-color: #327bff; */
     color: #fff;
   }
 
