@@ -88,11 +88,10 @@ const Budget: React.FC<BudgetProps> = ({
             type="string"
             name="budget"
             // adding in commas to budget number
-            // also testing to make sure user input is only numbers
+            // also testing to make sure user input is only numbers or blank
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               if (
-                /[^0-9]/.test(e.target.value[e.target.value.length - 1]) ===
-                false
+                !e.target.value.length || /[0-9]/.test(e.target.value[e.target.value.length - 1])
               ) {
                 setBudget(
                   Number(e.target.value.replace(/[,]/g, '')).toLocaleString()
