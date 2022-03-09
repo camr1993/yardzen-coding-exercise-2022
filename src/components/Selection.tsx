@@ -50,7 +50,7 @@ const Selection: React.FC<SelectionProps> = ({
   }, [])
 
   // This function loads the 'items' collection from firestore and saves it on state
-  // It also removes duplicates from firestore
+  // It also removes duplicates from firestore and sorts by type
   const loadItemsToState = () => {
     db.collection('items').get().then((querySnapshot) => {
       const initialItemArr: Item[] = extractItemsFromSnapshot(querySnapshot)
