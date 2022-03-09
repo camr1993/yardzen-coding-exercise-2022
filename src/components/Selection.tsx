@@ -97,13 +97,13 @@ const Selection: React.FC<SelectionProps> = ({
   // It will also change any previously selected item in that group to have a selected property of false
   // Lastly, the cart is set to only include selected items
   const handleSelectItem = (item: Item) => {
-    let filtered = items.filter((el) => {
+    const filteredItems: Item[] = items.filter((el: Item) => {
       return el.type === item.type
     })
-    filtered.forEach((el) => {
+    filteredItems.forEach((el: Item) => {
       if (el === item) {
         // if already selected then unselect it
-        if (el.selected === true) {
+        if (el.selected) {
           el.selected = false
           // else, select it
         } else {
@@ -115,7 +115,7 @@ const Selection: React.FC<SelectionProps> = ({
     })
     // set the cart to only selected Items
     setCart(
-      items.filter((item) => {
+      items.filter((item: Item) => {
         return item.selected === true
       })
     )
