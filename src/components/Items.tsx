@@ -76,7 +76,6 @@ const Items: React.FC<ItemsProps> = ({ items, handleSelectItem }) => {
                 return (
                   <div key={el.name + i} onClick={() => handleSelectItem(el)}>
                     <Item
-                      type={el.type}
                       name={el.name}
                       lowPrice={el.lowPrice}
                       highPrice={el.highPrice}

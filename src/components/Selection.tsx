@@ -60,6 +60,8 @@ const Selection: React.FC<SelectionProps> = ({
       querySnapshot.forEach((doc) => {
         const item = doc.data() as Item
         item.selected = false
+        item.lowPrice = item.lowPrice / 100
+        item.highPrice = item.highPrice / 100
         if (!(item.name in seen)) {
           seen[item.name] = true
           itemArr.push(item)

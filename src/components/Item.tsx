@@ -29,20 +29,17 @@ const StyledItem = styled.div`
 
 // The Item component displays a singular item in the item list
 interface ItemProps {
-  type: string
   name: string
   lowPrice: number
   highPrice: number
   selected?: boolean
 }
 const Item: React.FC<ItemProps> = ({
-  type,
   name,
   lowPrice,
   highPrice,
   selected,
 }) => {
-  const itemDiv = useRef<HTMLDivElement | null>(null)
 
   return (
     <StyledItem className={`${selected ? 'selected' : ''}`}>

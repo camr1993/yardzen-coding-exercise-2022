@@ -161,7 +161,7 @@ const App: React.FC = () => {
         <div ref={welcomeDiv} className="welcome">
           <div className="title">Welcome</div>
           <div>
-            You want to create the outdoor space of you dreams, but need to know
+            You want to create the outdoor space of you dreams, but you need to know
             what you can afford. Let us help you work within your budget.
           </div>
           <button type="button" onClick={handleGetStarted}>
