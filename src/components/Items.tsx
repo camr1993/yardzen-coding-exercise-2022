@@ -53,7 +53,7 @@ interface ItemsProps {
 }
 const Items: React.FC<ItemsProps> = ({ items, handleSelectItem }) => {
   // Find the different types of items (which will be used to group the item list shown)
-  const uniqueTypes = items.reduce((accum: string[], current: Item) => {
+  const uniqueTypes: string[] = items.reduce((accum: string[], current: Item) => {
     if (accum.indexOf(current.type) === -1) {
       accum.push(current.type)
     }
@@ -64,15 +64,15 @@ const Items: React.FC<ItemsProps> = ({ items, handleSelectItem }) => {
     <StyledItems>
       <h2>Select Desired Elements</h2>
       {/* This section of code displays all the items grouped by type */}
-      {uniqueTypes.map((type, i) => {
+      {uniqueTypes.map((type: string, i: number) => {
         return (
           <div key={type + i} className="item-group">
             <h3>
               {type[0] + type.slice(1).replace(/[_]/g, ' ').toLowerCase()}
             </h3>
             {items
-              .filter((el) => el.type === type)
-              .map((el, i) => {
+              .filter((el: Item) => el.type === type)
+              .map((el: Item, i: number) => {
                 return (
                   <div key={el.name + i} onClick={() => handleSelectItem(el)}>
                     <Item
