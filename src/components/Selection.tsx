@@ -122,7 +122,7 @@ const Selection: React.FC<SelectionProps> = ({
   }
 
   const handleSubmit = () => {
-    // Add a new document in collection "cities"
+    // Add a new document in collection
     db
       .collection('cameronRatliffBudgetResponses')
       .doc('budget')
