@@ -132,15 +132,15 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
               Change
             </button>
           </div>
-          <div>${formatMoney(convertBudgetToNum(budget))}</div>
+          <div>{formatMoney(convertBudgetToNum(budget))}</div>
         </div>
         <div className="summary-item">
           <div>Price (Lower Range)</div>
-          <div>${formatMoney(lowerPrice)}</div>
+          <div>{formatMoney(lowerPrice)}</div>
         </div>
         <div className="summary-item">
           <div>Price (Upper Range)</div>
-          <div>${formatMoney(upperPrice)}</div>
+          <div>{formatMoney(upperPrice)}</div>
         </div>
         <hr />
         <div>Your Budget is...</div>

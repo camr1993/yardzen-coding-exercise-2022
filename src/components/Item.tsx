@@ -43,7 +43,7 @@ const Item: React.FC<ItemProps> = ({
     <StyledItem className={`${selected ? 'selected' : ''}`}>
       <div className="item-name">{name}</div>
       <div>
-        Price Range: ${formatMoney(lowPrice)} - ${formatMoney(highPrice)}
+        Price Range: {formatMoney(lowPrice)} - {formatMoney(highPrice)}
       </div>
     </StyledItem>
   )
