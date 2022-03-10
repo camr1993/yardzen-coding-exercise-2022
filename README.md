@@ -7,6 +7,7 @@ This is a budget calculator aimed at helping clients set realistic expectations 
 - React
 - JavaScript / TypeScript
 - Firebase
+- Jest
 
 ## Available Scripts
 
